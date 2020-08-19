@@ -188,7 +188,7 @@
         abso = delta_x < 0 ? delta_x * -1 : delta_x;
         if (abso < 100)
           Set_Random_State();
-        else if (delta_x < 0)
+        else if (delta_x > 0)
           Set_Previous_State();
         else
           Set_Next_State();
