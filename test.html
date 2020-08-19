@@ -185,7 +185,8 @@
 
       $(document).on('mouseup', e => {
         delta_x = e.offsetX - swipe_start_x;
-        if (abs(delta_x) < 100)
+        abso = delta_x < 0 ? delta_x * -1 : delta_x;
+        if (abso < 100)
           Set_Random_State();
         else if (delta_x < 0)
           Set_Previous_State();
