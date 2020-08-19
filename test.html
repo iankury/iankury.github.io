@@ -201,12 +201,12 @@
         set_to = 'left';
       });
 
-      $(document).on('mousedown', e => {
+      $(document).on('touchstart', e => {
         e.preventDefault();
         set_to = 'random';
       });
 
-      $(document).on('mouseup', e => {
+      $(document).on('touchend', e => {
         if (set_to == 'right')
           Set_Previous_State();
         else if (set_to == 'left')
