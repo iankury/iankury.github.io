@@ -1,0 +1,191 @@
+﻿<!doctype html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>
+    Pinhalpha
+  </title>
+  <style>
+    @font-face {
+      font-family: rounded_medium;
+      src: url('./RoundedMplus1c-Medium.ttf');
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      background-color: #abdba9;
+    }
+    .rounded {
+      font-family: rounded_medium, sans-serif;
+    }
+    h1 {
+      font-weight: 300;
+      position: absolute;
+      top: 4vh;
+      left: 13vw;
+      font-size: 22vw;
+    }
+    h2 {
+      position: absolute;
+      top: 66vh;
+      left: 15vw;
+      font-size: 5vw;
+      text-align: center;
+    }
+    #image_container {
+      position: absolute;
+      top: 8vh;
+      left: 40vw;
+      width: 52vw;
+      height: 82vh;
+    }
+    img {
+      position: absolute;
+      object-fit: contain;
+      width: 100%;
+      height: 100%;
+      top: 50%;
+      left: 50%;
+      margin-right: -50%;
+      transform: translate(-50%, -50%);
+    }
+  </style>
+</head>
+<body>
+
+
+  <div>
+    <h1 class="rounded">@</h1>
+    <h2 class="rounded">Loading</h2>
+    <div id="image_container"></div>
+  </div>
+  
+
+  <script src="./jquery.js"></script>
+  <script>
+    const words = [
+      'ABACAXI', 'BOLA', 'CARRO', 'DADO', 'ELEFANTE',
+      'FLOR', 'GATO', 'HOTEL', 'ÍMÃ', 'JACARÉ', 'KETCHUP', 'LIVRO',
+      'MAMÃE', 'NAVIO', 'OLHO', 'PATO', 'QUEIJO', 'RATO', 'SAPO',
+      'TOMATE', 'UVA', 'VOVÓ', 'WEB', 'XÍCARA', 'YOGA', 'ZEBRA'
+    ];
+    const imglinks = [
+      './abacaxi.png', './bola.png', './carro.png', './dado.png', './elefante.png',
+      './flor.png', './gato.png', './hotel.png', './ima.png', './jacare.png',
+      './ketchup.png', './livro.png', './mamae.png', './navio.png', './olho.png',
+      './pato.png', './queijo.png', './rato.png', './sapo.png', './tomate.png',
+      './uva.png', './vovo.png', './web.jpg', './xicara.png', './yoga.png', './zebra.png'
+    ];
+    let img_cache = [];
+    let loaded_images = 0;
+    let up_and_running = false;
+
+    let idx = 0;
+    
+    $(document).ready(() => {
+      if (window.innerWidth < window.innerHeight)
+        Mobile();
+      else
+        $(document).on('mousedown', () => Set_Random());
+      Preload_Images();
+      $(document).on('keydown', e => {
+        const code = e.which;
+        if (code == 32)
+          Set_Random_State();
+        else if (code >= 65 && code <= 90) {
+          idx = code - 65;
+          Set_State();
+        }
+      });
+    });
+
+    function Set_Previous_State() {
+      idx--;
+      if (idx < 0)
+        idx = 25;
+      Set_State();
+    }
+
+    function Set_Next_State() {
+      idx++;
+      if (idx > 25)
+        idx = 0;
+      Set_State();
+    }
+
+    function Set_Random_State() {
+      let luck = 0;
+      do {
+        luck = Math.floor(Math.random() * 26);
+      } while (luck == idx);
+      idx = luck;
+      Set_State();
+    }
+
+    function Set_State() {
+      if (!up_and_running)
+        return;
+      $('#image_container').empty();
+      $('#image_container').append(img_cache[idx])
+      const letter = String.fromCharCode(idx + 65);
+      $('h1').html(letter);
+      $('h2').html(words[idx]);
+    }
+
+    function Preload_Images() {
+      img_cache = [];
+      loaded_images = 0;
+      up_and_running = false;
+      for (i = 0; i < 26; i++) {
+        img = new Image();
+        img.onload = () => Loaded_Image();
+        img.src = imglinks[i];
+        img_cache.push(img);
+      }
+    }
+
+    function Loaded_Image() {
+      loaded_images++;
+      if (loaded_images == 26) {
+        up_and_running = true;
+        Set_State(0);
+      }
+    }
+
+    function Mobile() {
+      $('h1').css({
+        top: '0',
+        left: '50%',
+        marginRight: '-50%',
+        transform: 'translate(-50%)',
+        fontSize: '35vw'
+      });
+      $('h2').css({
+        top: '79vh',
+        left: '50%',
+        marginRight: '-50%',
+        transform: 'translate(-50%)',
+        fontSize: '12vw'
+      });
+      $('#image_container').css({
+        top: '25vh',
+        left: '3vw',
+        height: '53vh',
+        width: '94vw'
+      });
+
+      let clientX = 0;
+
+      $(document).on('touchstart', e => clientX = e.touches[0].clientX, false);
+
+      $(document).on('touchend', e => {
+        deltaX = e.changedTouches[0].clientX - clientX;
+        $('h2').html(deltaX.toString());
+      }, false);
+    }
+  </script>
+</body>
+</html>
