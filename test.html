@@ -91,6 +91,7 @@
     let img_cache = [];
     let loaded_images = 0;
     let up_and_running = false;
+    let set_to = 'random';
 
     let idx = 0;
 
@@ -190,9 +191,29 @@
         width: '94vw'
       });
 
-      $(document).on('swiperight', Set_Previous_State);
+      $(document).on('swiperight', e => {
+        e.preventDefault();
+        set_to = 'right';
+      });
 
-      $(document).on('swipeleft', Set_Next_State);
+      $(document).on('swipeleft', e => {
+        e.preventDefault();
+        set_to = 'left';
+      });
+
+      $(document).on('mousedown', e => {
+        e.preventDefault();
+        set_to = 'random';
+      });
+
+      $(document).on('mouseup', e => {
+        if (set_to == 'right')
+          Set_Previous_State();
+        else if (set_to == 'left')
+          Set_Next_State();
+        else
+          Set_Random_State();
+      });
     }
   </script>
 </body>
