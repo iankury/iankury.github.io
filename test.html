@@ -83,6 +83,8 @@
     let loaded_images = 0;
     let up_and_running = false;
 
+    let swipe_start_x = 0;
+
     let idx = 0;
     
     $(document).ready(() => {
@@ -178,7 +180,17 @@
       });
 
       $(document).on('mousedown', e => {
-        $('h2').html(e.offsetX.toString());
+        swipe_start_x = e.offsetX;
+      });
+
+      $(document).on('mouseup', e => {
+        delta_x = e.offsetX - swipe_start_x;
+        if (abs(delta_x) < 100)
+          Set_Random_State();
+        else if (delta_x < 0)
+          Set_Previous_State();
+        else
+          Set_Next_State();
       });
     }
   </script>
