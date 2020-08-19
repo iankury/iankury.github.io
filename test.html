@@ -177,14 +177,9 @@
         width: '94vw'
       });
 
-      let clientX = 0;
-
-      $(document).on('touchstart', e => clientX = e.touches[0].clientX, false);
-
-      $(document).on('touchend', e => {
-        deltaX = e.changedTouches[0].clientX - clientX;
-        $('h2').html(deltaX.toString());
-      }, false);
+      $(document).on('mousedown', e => {
+        $('h2').html(e.offsetX.toString());
+      });
     }
   </script>
 </body>
