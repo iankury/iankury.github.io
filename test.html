@@ -21,6 +21,7 @@
       padding: 0;
       color: black !important;
       background-color: #abdba9 !important;
+      cursor: pointer;
     }
 
     .rounded {
@@ -96,8 +97,12 @@
     $(document).ready(() => {
       if (window.innerWidth < window.innerHeight)
         Mobile();
-      else
-        $(document).on('mousedown', () => Set_Random_State());
+      else {
+        $(document).on('mousedown', e => {
+          e.preventDefault();
+          Set_Random_State();
+        });
+      }
       Preload_Images();
       $(document).on('keydown', e => {
         const code = e.which;
@@ -185,11 +190,9 @@
         width: '94vw'
       });
 
-      $(document).on('swiperight', Set_Next_State);
+      $(document).on('swiperight', Set_Previous_State);
 
-      $(document).on('swipeleft', Set_Previous_State);
-
-      $(document).on('tap', Set_Random_State);
+      $(document).on('swipeleft', Set_Next_State);
     }
   </script>
 </body>
