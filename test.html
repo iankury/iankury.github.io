@@ -2,6 +2,10 @@
 <html>
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="jquery.mobile-1.4.5.min.css">
+  <script src="jquery.js"></script>
+  <script src="jquery.mobile-1.4.5.min.js"></script>
   <title>
     Pinhalpha
   </title>
@@ -10,17 +14,21 @@
       font-family: rounded_medium;
       src: url('./RoundedMplus1c-Medium.ttf');
     }
+
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
     }
+
     body {
       background-color: #abdba9;
     }
+
     .rounded {
       font-family: rounded_medium, sans-serif;
     }
+
     h1 {
       font-weight: 300;
       position: absolute;
@@ -28,6 +36,7 @@
       left: 13vw;
       font-size: 22vw;
     }
+
     h2 {
       position: absolute;
       top: 66vh;
@@ -35,6 +44,7 @@
       font-size: 5vw;
       text-align: center;
     }
+
     #image_container {
       position: absolute;
       top: 8vh;
@@ -42,6 +52,7 @@
       width: 52vw;
       height: 82vh;
     }
+
     img {
       position: absolute;
       object-fit: contain;
@@ -64,8 +75,6 @@
   </div>
 
 
-  <script src="./jquery.js"></script>
-  <script src="./jquery-mobile.js"></script>
   <script>
     const words = [
       'ABACAXI', 'BOLA', 'CARRO', 'DADO', 'ELEFANTE',
@@ -178,11 +187,11 @@
         width: '94vw'
       });
 
-      $(document).on('swiperight', () => Set_Next_State());
+      $('#image_container').on('swiperight', Set_Next_State);
 
-      $(document).on('swipeleft', () => Set_Previous_State());
+      $('#image_container').on('swipeleft', Set_Previous_State);
 
-      $(document).on('tap', () => Set_Random_State());
+      $('#image_container').on('tap', Set_Random_State);
     }
   </script>
 </body>
