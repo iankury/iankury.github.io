@@ -10,17 +10,21 @@
       font-family: rounded_medium;
       src: url('./RoundedMplus1c-Medium.ttf');
     }
+
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
     }
+
     body {
       background-color: #abdba9;
     }
+
     .rounded {
       font-family: rounded_medium, sans-serif;
     }
+
     h1 {
       font-weight: 300;
       position: absolute;
@@ -28,6 +32,7 @@
       left: 13vw;
       font-size: 22vw;
     }
+
     h2 {
       position: absolute;
       top: 66vh;
@@ -35,6 +40,7 @@
       font-size: 5vw;
       text-align: center;
     }
+
     #image_container {
       position: absolute;
       top: 8vh;
@@ -42,6 +48,7 @@
       width: 52vw;
       height: 82vh;
     }
+
     img {
       position: absolute;
       object-fit: contain;
@@ -62,7 +69,7 @@
     <h2 class="rounded">Loading</h2>
     <div id="image_container"></div>
   </div>
-  
+
 
   <script src="./jquery.js"></script>
   <script>
@@ -84,16 +91,16 @@
     let up_and_running = false;
 
     let idx = 0;
-    
+
     $(document).ready(() => {
       if (window.innerWidth < window.innerHeight)
         Mobile();
       Preload_Images();
       $(document).on('keydown', e => {
         const code = e.which;
-        if (code == 32) 
+        if (code == 32)
           Set_Random();
-        else if (code >= 65 && code <= 90) 
+        else if (code >= 65 && code <= 90)
           Set_State(code - 65);
       });
       $(document).on('mousedown', () => Set_Random());
