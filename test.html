@@ -62,9 +62,10 @@
     <h2 class="rounded">Loading</h2>
     <div id="image_container"></div>
   </div>
-  
+
 
   <script src="./jquery.js"></script>
+  <script src="./jquery-mobile.js"></script>
   <script>
     const words = [
       'ABACAXI', 'BOLA', 'CARRO', 'DADO', 'ELEFANTE',
@@ -83,10 +84,8 @@
     let loaded_images = 0;
     let up_and_running = false;
 
-    let swipe_start_x = 0;
-
     let idx = 0;
-    
+
     $(document).ready(() => {
       if (window.innerWidth < window.innerHeight)
         Mobile();
@@ -179,20 +178,11 @@
         width: '94vw'
       });
 
-      $(document).on('mousedown', e => {
-        swipe_start_x = e.offsetX;
-      });
+      $(document).on('swiperight', () => Set_Next_State());
 
-      $(document).on('mouseup', e => {
-        delta_x = e.offsetX - swipe_start_x;
-        abso = delta_x < 0 ? delta_x * -1 : delta_x;
-        if (abso < 100)
-          Set_Random_State();
-        else if (delta_x > 0)
-          Set_Previous_State();
-        else
-          Set_Next_State();
-      });
+      $(document).on('swipeleft', () => Set_Previous_State());
+
+      $(document).on('tap', () => Set_Random_State());
     }
   </script>
 </body>
