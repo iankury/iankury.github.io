@@ -92,6 +92,7 @@
     let loaded_images = 0;
     let up_and_running = false;
     let set_to = 'random';
+    let forbidden = false;
 
     let idx = 0;
 
@@ -106,6 +107,9 @@
       }
       Preload_Images();
       $(document).on('keydown', e => {
+        if (forbidden)
+          return;
+        forbidden = true;
         const code = e.which;
         if (code == 32)
           Set_Random_State();
@@ -114,6 +118,7 @@
           Set_State();
         }
       });
+      $(document).on('keyup', () => forbidden = false);
     });
 
     function Set_Previous_State() {
