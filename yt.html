@@ -1,0 +1,88 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>EthanYT</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: black;
+      overflow-x: hidden;
+    }
+
+    main {
+      position: relative;
+      left: 50%;
+      transform: translate(-50%);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      width: 90%;
+    }
+
+    .box {
+      width: 24vh;
+      height: 18vh;
+      margin: 2vh 2vh 4vh 2vh;
+      cursor: pointer;
+      user-select: none;
+      user-drag: none;
+    }
+
+    img {
+      width: 100%;
+      height: 100%;
+    }
+
+    p {
+      font-family: 'Times New Roman', serif;
+      color: wheat;
+      text-align: center;
+    }
+
+    @media (orientation: portrait) {
+      main {
+        width: 98%
+      }
+
+      p {
+        font-size: 30px;
+      }
+
+      .box {
+        width: 22.08vh;
+        height: 16.56vh;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main></main>
+
+  <script src="jquery.js"></script>
+  <script src="data.js"></script>
+  <script>
+    videos.forEach((x, i) => {
+      const s = thumb_prefix + x + thumb_suffix
+      const p = $(`<p>${names[i]}</p>`)
+      const img = $(`<img src="${s}">`)
+      const box = $(`<div id="${x}" class="box"></div>`)
+      box.append(img)
+      box.append(p)
+      $('main').append(box)
+    })
+
+    $('.box').click(Click)
+
+    function Click(e) {
+      const s = e.target.id || e.target.parentElement.id
+      window.open(`https://www.youtube.com/watch?v=${s}`)
+    }
+  </script>
+</body>
+</html>
