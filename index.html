@@ -99,7 +99,7 @@
 
     let idx = 0;
 
-    let secret = 0;
+    let secret = 0, opened_secret = false;
 
     $(document).ready(() => {
       if (window.innerWidth < window.innerHeight)
@@ -202,6 +202,8 @@
       }
     }
 
+    let initial_x = 8888, initial_y = 0, initial_time = 0
+
     function Mobile() {
       $('h1').css({
         top: '0',
@@ -237,6 +239,9 @@
       $(document).on('touchstart', e => {
         e.preventDefault();
         set_to = 'random';
+        initial_x = e.changedTouches.item(0).clientX;
+        initial_y = e.changedTouches.item(0).clientY;
+        initial_time = (new Date()).getTime()
       });
 
       $(document).on('touchend', e => {
@@ -246,10 +251,22 @@
           Set_Next_State();
         else
           Set_Random_State();
+
+        const delta_x = e.changedTouches.item(0).clientX - initial_x;
+        const delta_y = e.changedTouches.item(0).clientY - initial_y;
+        const ratio_1 = delta_x / window.innerWidth;
+        const ratio_2 = delta_y / window.innerHeight;
+        const delta_time = (new Date()).getTime() - initial_time;
+        if (ratio_1 < -0.85 && ratio_2 < -0.85 && delta_time > 1500 && delta_time < 3500)
+          Secret();
       });
     }
 
     function Secret() {
+      if (opened_secret)
+        return;
+      opened_secret = true;
+
       $('div').remove();
       $('body *').removeClass('green');
       $('body').css({
@@ -299,11 +316,12 @@
       });
 
       if (window.innerHeight > window.innerWidth) {
-        $('main').css('width', '98%');
+        $('main').css('width', '100%');
         $('p').css('font-size', '2vh');
         $('.box').css({
-          width: '22.08vh',
-          height: '16.56vh'
+          width: '45vw',
+          height: '33.75vw',
+          margin: '2vh 1vw 4vh 1vw',
         });
       }
 
