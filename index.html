@@ -284,11 +284,11 @@
         width: '90%'
       });
 
-      videos.forEach((x, i) => {
-        const s = thumb_prefix + x + thumb_suffix;
-        const p = $(`<p>${names[i]}</p>`);
+      videos.forEach(x => {
+        const s = thumb_prefix + x[0] + thumb_suffix;
+        const p = $(`<p>${x[1]}</p>`);
         const img = $(`<img src="${s}">`);
-        const box = $(`<div id="${x}" class="box"></div>`);
+        const box = $(`<div id="${x[0]}" class="box"></div>`);
         box.append(img);
         box.append(p);
         $('main').append(box);
@@ -297,7 +297,7 @@
       $('.box').css({
         width: '24vh',
         height: '18vh',
-        margin: '2vh 2vh 4vh 2vh',
+        margin: '2vh 2vh 6vh 2vh',
         cursor: 'pointer',
         userSelect: 'none',
         userDrag: 'none'
