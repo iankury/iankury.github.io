@@ -274,13 +274,11 @@
       });
       $('body').append('<main></main>');
       $('main').css({
-        position: 'relative',
-        left: '50%',
-        transform: 'translate(-50%)',
         display: 'flex',
         flexWrap: 'wrap',
-        justifyContent: 'space-between',
-        width: '90%'
+        justifyContent: 'space-evenly',
+        width: '100%',
+        padding: '1vh 2vw 30vh 2vw'
       });
 
       videos.forEach(x => {
@@ -294,24 +292,26 @@
       });
 
       $('.box').css({
-        width: '24vh',
-        height: '18vh',
-        margin: '2vh 2vh 6vh 2vh',
+        width: '15vw',
+        padding: '0 1vw 0 1vw',
         cursor: 'pointer',
         userSelect: 'none',
         userDrag: 'none'
       });
 
       $('img').css({
-        position: 'relative',
+        position: 'static',
         width: '100%',
-        height: '100%'
+        height: 'auto',
+        margin: '0',
+        transform: 'none'
       });
 
       $('p').css({
         fontFamily: `'Times New Roman', serif`,
         color: 'wheat',
-        textAlign: 'center'
+        textAlign: 'center',
+        paddingBottom: '3vh'
       });
 
       if (window.innerHeight > window.innerWidth) {
