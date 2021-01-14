@@ -79,8 +79,16 @@ const videos = [
     'A Whole New World (DE)'
   ],
   [
+    'ZqesZeoiE6I',
+    'Christmas Time Is Coming \'Round Today'
+  ],
+  [
     'dhW1mh7U6-U',
     'Tír na nÓg'
+  ],
+  [
+    'QTy9N7t-hdw',
+    'Téir Abhaile Riú'
   ],
   [
     'H9fXoZmMHK8',
